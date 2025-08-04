@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,13 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body {
             margin: 0;
             padding: 20px;
             background-color: #f5f5f5;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -22,16 +25,19 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
             text-align: center;
             color: #2c3e50;
             margin-bottom: 30px;
         }
+
         .tabs {
             display: flex;
             margin-bottom: 20px;
             border-bottom: 1px solid #ddd;
         }
+
         .tab {
             padding: 10px 20px;
             cursor: pointer;
@@ -42,13 +48,16 @@
             border-radius: 5px 5px 0 0;
             margin-right: 5px;
         }
+
         .tab:hover {
             background-color: #ddd;
         }
+
         .tab.active {
             background-color: #3498db;
             color: white;
         }
+
         .tab-content {
             display: none;
             padding: 20px;
@@ -56,23 +65,29 @@
             border-top: none;
             border-radius: 0 0 5px 5px;
         }
+
         .tab-content.active {
             display: block;
         }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
-        input, select {
+
+        input,
+        select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
         button {
             background-color: #3498db;
             color: white;
@@ -82,48 +97,58 @@
             cursor: pointer;
             font-size: 16px;
         }
+
         button:hover {
             background-color: #2980b9;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 12px;
             text-align: left;
         }
+
         th {
             background-color: #3498db;
             color: white;
         }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
         .search-container {
             margin-bottom: 20px;
         }
+
         .search-container input {
             width: 300px;
             display: inline-block;
         }
+
         .action-btns button {
             margin-right: 5px;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Student Management System</h1>
-        
+
         <div class="tabs">
             <button class="tab active" onclick="openTab('add-student')">Add Student</button>
             <button class="tab" onclick="openTab('manage-students')">Manage Students</button>
             <button class="tab" onclick="openTab('attendance')">Attendance</button>
         </div>
-        
+
         <div id="add-student" class="tab-content active">
             <h2>Add New Student</h2>
             <form id="student-form">
@@ -154,7 +179,7 @@
                 <button type="submit">Add Student</button>
             </form>
         </div>
-        
+
         <div id="manage-students" class="tab-content">
             <h2>Student Records</h2>
             <div class="search-container">
@@ -177,7 +202,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div id="attendance" class="tab-content">
             <h2>Monthly Attendance</h2>
             <div class="attendance-controls">
@@ -227,62 +252,77 @@
 
     <script>
         // Initialize the system when the page loads
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Load students from localStorage or initialize with test data
             if (!localStorage.getItem('students') || JSON.parse(localStorage.getItem('students')).length === 0) {
                 initializeTestData();
             }
-            
+
             // Load students
             loadStudents();
-            
+
             // Populate year dropdown for attendance
             populateYearDropdown();
-            
+
             // Set current month and year
             const currentDate = new Date();
             document.getElementById('attendance-month').value = currentDate.getMonth() + 1;
             document.getElementById('attendance-year').value = currentDate.getFullYear();
-            
+
             // Load current month's attendance
             loadAttendance();
-            
+
             // Set up form submission
-            document.getElementById('student-form').addEventListener('submit', function(e) {
+            document.getElementById('student-form').addEventListener('submit', function (e) {
                 e.preventDefault();
                 addStudent();
             });
         });
-        
+
         // Function to initialize with test data
         function initializeTestData() {
             const testStudents = [
-                { id: "S001", name: "Azmat Afzal", class: "12", section: "1C4", dob: "2006-05-31", contact: "032567373673" },
-                { id: "S002", name: "Ali Khan", class: "11", section: "1B2", dob: "2007-02-15", contact: "03331234567" },
-                { id: "S003", name: "Sara Ahmed", class: "10", section: "1A1", dob: "2008-08-20", contact: "03009876543" },
-                { id: "S004", name: "Usman Malik", class: "12", section: "1C3", dob: "2006-11-05", contact: "03115556677" },
-                { id: "S005", name: "Fatima Riaz", class: "11", section: "1B1", dob: "2007-04-19", contact: "03451237890" },
-                { id: "S006", name: "John", class: "7", section: "1M1", dob: "2011-04-18", contact: "03451237843" },
-                { id: "S007", name: "Jeson", class: "12", section: "1E1", dob: "2011-04-29", contact: "03451237881" },
-                { id: "S008", name: "Alex", class: "9", section: "B", dob: "2011-04-25", contact: "0345123788666" },
+                { id: "#001", name: "Azmat Afzal", class: "12", section: "1C4", dob: "2006-05-31", contact: "032567373673" },
+                { id: "#002", name: "Ali Khan", class: "11", section: "1B2", dob: "2007-02-15", contact: "03331234567" },
+                { id: "#003", name: "Sara Ahmed", class: "10", section: "1A1", dob: "2008-08-20", contact: "03009876543" },
+                { id: "#004", name: "Usman Malik", class: "12", section: "1C3", dob: "2006-11-05", contact: "03115556677" },
+                { id: "#005", name: "Fatima Riaz", class: "11", section: "1B1", dob: "2007-04-19", contact: "03451237890" },
+                { id: "#006", name: "John", class: "7", section: "1M1", dob: "2011-04-18", contact: "03451237843" },
+                { id: "#007", name: "Jeson", class: "12", section: "1E1", dob: "2011-04-29", contact: "03451237881" },
+                { id: "#008", name: "Alex", class: "9", section: "B", dob: "2011-04-25", contact: "0345123788666" },
+                { id: "#009", name: "Emma", class: "8", section: "A", dob: "2011-07-12", contact: "0345123788667" },
+                { id: "#010", name: "Ryan", class: "10", section: "C", dob: "2010-11-05", contact: "0345123788668" },
+                { id: "#011", name: "Sophia", class: "9", section: "D", dob: "2011-03-18", contact: "0345123788669" },
+                { id: "#012", name: "Liam", class: "7", section: "B", dob: "2012-09-22", contact: "0345123788670" },
+                { id: "#013", name: "Olivia", class: "8", section: "A", dob: "2011-12-30", contact: "0345123788671" },
+                { id: "#014", name: "Noah", class: "10", section: "D", dob: "2010-05-14", contact: "0345123788672" },
+                { id: "#015", name: "Ava", class: "9", section: "C", dob: "2011-08-08", contact: "0345123788673" },
+                { id: "#016", name: "William", class: "7", section: "A", dob: "2012-02-17", contact: "0345123788674" },
+                { id: "#017", name: "Isabella", class: "8", section: "B", dob: "2011-10-03", contact: "0345123788675" },
+                { id: "#018", name: "James", class: "10", section: "A", dob: "2010-06-28", contact: "0345123788676" },
+                { id: "#019", name: "Mia", class: "9", section: "D", dob: "2011-01-15", contact: "0345123788677" },
+                { id: "#020", name: "Benjamin", class: "7", section: "C", dob: "2012-04-10", contact: "0345123788678" },
+                { id: "#021", name: "Charlotte", class: "8", section: "D", dob: "2011-09-20", contact: "0345123788679" },
+                { id: "#022", name: "Lucas", class: "10", section: "B", dob: "2010-07-07", contact: "0345123788680" },
+                { id: "#023", name: "Amelia", class: "9", section: "A", dob: "2011-05-11", contact: "0345123788681" }
             ];
-            
+
             localStorage.setItem('students', JSON.stringify(testStudents));
-            
+
             // Add test attendance data for current month
             const currentDate = new Date();
             const month = currentDate.getMonth() + 1;
             const year = currentDate.getFullYear();
             const attendanceKey = `attendance-${month}-${year}`;
-            
+
             const attendanceData = {};
             testStudents.forEach(student => {
                 // Randomly assign attendance (about 80% present)
                 attendanceData[student.id] = Math.random() > 0.2 ? 'present' : 'absent';
             });
-            
+
             localStorage.setItem(attendanceKey, JSON.stringify(attendanceData));
-            
+
             console.log("Test data initialized successfully");
         }
 
@@ -292,25 +332,25 @@
             for (let i = 0; i < tabContents.length; i++) {
                 tabContents[i].classList.remove('active');
             }
-            
+
             const tabs = document.getElementsByClassName('tab');
             for (let i = 0; i < tabs.length; i++) {
                 tabs[i].classList.remove('active');
             }
-            
+
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
-            
+
             if (tabId === 'attendance') {
                 loadAttendance();
             }
         }
-        
+
         function loadStudents() {
             const students = JSON.parse(localStorage.getItem('students')) || [];
             const studentsList = document.getElementById('students-list');
             studentsList.innerHTML = '';
-            
+
             students.forEach(student => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -328,7 +368,7 @@
                 studentsList.appendChild(row);
             });
         }
-        
+
         function addStudent() {
             const id = document.getElementById('student-id').value;
             const name = document.getElementById('student-name').value;
@@ -336,14 +376,14 @@
             const section = document.getElementById('student-section').value;
             const dob = document.getElementById('student-dob').value;
             const contact = document.getElementById('student-contact').value;
-            
+
             const students = JSON.parse(localStorage.getItem('students')) || [];
-            
+
             if (students.some(student => student.id === id)) {
                 alert('Student ID already exists!');
                 return;
             }
-            
+
             students.push({
                 id,
                 name,
@@ -352,31 +392,31 @@
                 dob,
                 contact
             });
-            
+
             localStorage.setItem('students', JSON.stringify(students));
             document.getElementById('student-form').reset();
             loadStudents();
             alert('Student added successfully!');
             document.querySelector('.tab[onclick="openTab(\'manage-students\')"]').click();
         }
-        
+
         // [Include all other existing functions...]
         function populateYearDropdown() {
             const yearSelect = document.getElementById('attendance-year');
             const currentYear = new Date().getFullYear();
-            
+
             yearSelect.innerHTML = '';
-            
+
             for (let year = currentYear - 5; year <= currentYear + 5; year++) {
                 const option = document.createElement('option');
                 option.value = year;
                 option.textContent = year;
                 yearSelect.appendChild(option);
             }
-            
+
             yearSelect.value = currentYear;
         }
-        
+
         function loadAttendance() {
             const month = document.getElementById('attendance-month').value;
             const year = document.getElementById('attendance-year').value;
@@ -384,16 +424,16 @@
             const attendanceKey = `attendance-${month}-${year}`;
             const attendanceData = JSON.parse(localStorage.getItem(attendanceKey)) || {};
             const attendanceList = document.getElementById('attendance-list');
-            
+
             attendanceList.innerHTML = '';
-            
+
             if (students.length === 0) {
                 const row = document.createElement('tr');
                 row.innerHTML = '<td colspan="6" style="text-align: center;">No students found. Please add students first.</td>';
                 attendanceList.appendChild(row);
                 return;
             }
-            
+
             students.forEach(student => {
                 const studentAttendance = attendanceData[student.id] || 'absent';
                 const row = document.createElement('tr');
@@ -412,67 +452,67 @@
                 attendanceList.appendChild(row);
             });
         }
-        
+
         function toggleAttendance(studentId) {
             const month = document.getElementById('attendance-month').value;
             const year = document.getElementById('attendance-year').value;
             const attendanceKey = `attendance-${month}-${year}`;
             const attendanceData = JSON.parse(localStorage.getItem(attendanceKey)) || {};
-            
+
             attendanceData[studentId] = attendanceData[studentId] === 'present' ? 'absent' : 'present';
             localStorage.setItem(attendanceKey, JSON.stringify(attendanceData));
             loadAttendance();
         }
-        
+
         function markAllPresent() {
             if (!confirm('Mark all students as present for this month?')) return;
-            
+
             const month = document.getElementById('attendance-month').value;
             const year = document.getElementById('attendance-year').value;
             const students = JSON.parse(localStorage.getItem('students')) || [];
             const attendanceKey = `attendance-${month}-${year}`;
             const attendanceData = {};
-            
+
             students.forEach(student => {
                 attendanceData[student.id] = 'present';
             });
-            
+
             localStorage.setItem(attendanceKey, JSON.stringify(attendanceData));
             loadAttendance();
         }
-        
+
         function markAllAbsent() {
             if (!confirm('Mark all students as absent for this month?')) return;
-            
+
             const month = document.getElementById('attendance-month').value;
             const year = document.getElementById('attendance-year').value;
             const students = JSON.parse(localStorage.getItem('students')) || [];
             const attendanceKey = `attendance-${month}-${year}`;
             const attendanceData = {};
-            
+
             students.forEach(student => {
                 attendanceData[student.id] = 'absent';
             });
-            
+
             localStorage.setItem(attendanceKey, JSON.stringify(attendanceData));
             loadAttendance();
         }
-        
+
         function saveAttendance() {
             alert('Attendance saved successfully!');
         }
-        
+
         function searchStudents() {
             const searchTerm = document.getElementById('search-student').value.toLowerCase();
             const students = JSON.parse(localStorage.getItem('students')) || [];
-            const filteredStudents = students.filter(student => 
-                student.id.toLowerCase().includes(searchTerm) || 
+            const filteredStudents = students.filter(student =>
+                student.id.toLowerCase().includes(searchTerm) ||
                 student.name.toLowerCase().includes(searchTerm)
             );
-            
+
             const studentsList = document.getElementById('students-list');
             studentsList.innerHTML = '';
-            
+
             filteredStudents.forEach(student => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -490,35 +530,35 @@
                 studentsList.appendChild(row);
             });
         }
-        
+
         function editStudent(id) {
             const students = JSON.parse(localStorage.getItem('students')) || [];
             const student = students.find(s => s.id === id);
-            
+
             if (!student) {
                 alert('Student not found!');
                 return;
             }
-            
+
             document.getElementById('student-id').value = student.id;
             document.getElementById('student-name').value = student.name;
             document.getElementById('student-class').value = student.class;
             document.getElementById('student-section').value = student.section;
             document.getElementById('student-dob').value = student.dob;
             document.getElementById('student-contact').value = student.contact;
-            
+
             document.querySelector('#student-form button').textContent = 'Update Student';
-            
+
             const form = document.getElementById('student-form');
             form.removeEventListener('submit', addStudent);
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 updateStudent(id);
             });
-            
+
             document.querySelector('.tab[onclick="openTab(\'add-student\')"]').click();
         }
-        
+
         function updateStudent(oldId) {
             const id = document.getElementById('student-id').value;
             const name = document.getElementById('student-name').value;
@@ -526,40 +566,40 @@
             const section = document.getElementById('student-section').value;
             const dob = document.getElementById('student-dob').value;
             const contact = document.getElementById('student-contact').value;
-            
+
             let students = JSON.parse(localStorage.getItem('students')) || [];
-            
+
             if (id !== oldId && students.some(student => student.id === id)) {
                 alert('Student ID already exists!');
                 return;
             }
-            
+
             students = students.map(student => {
                 if (student.id === oldId) {
                     return { id, name, class: studentClass, section, dob, contact };
                 }
                 return student;
             });
-            
+
             if (oldId !== id) {
                 updateAttendanceRecordsId(oldId, id);
             }
-            
+
             localStorage.setItem('students', JSON.stringify(students));
             document.getElementById('student-form').reset();
             document.querySelector('#student-form button').textContent = 'Add Student';
             loadStudents();
             alert('Student updated successfully!');
             document.querySelector('.tab[onclick="openTab(\'manage-students\')"]').click();
-            
+
             const form = document.getElementById('student-form');
             form.removeEventListener('submit', updateStudent);
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 addStudent();
             });
         }
-        
+
         function updateAttendanceRecordsId(oldId, newId) {
             const keys = Object.keys(localStorage);
             keys.forEach(key => {
@@ -573,10 +613,10 @@
                 }
             });
         }
-        
+
         function deleteStudent(id) {
             if (!confirm('Are you sure you want to delete this student?')) return;
-            
+
             let students = JSON.parse(localStorage.getItem('students')) || [];
             students = students.filter(student => student.id !== id);
             removeAttendanceRecords(id);
@@ -584,7 +624,7 @@
             loadStudents();
             alert('Student deleted successfully!');
         }
-        
+
         function removeAttendanceRecords(id) {
             const keys = Object.keys(localStorage);
             keys.forEach(key => {
@@ -600,4 +640,5 @@
     </script>
     <script src="/docs/index.js"></script>
 </body>
+
 </html>
